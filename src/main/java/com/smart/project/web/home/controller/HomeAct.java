@@ -56,9 +56,6 @@ public class HomeAct {
 		model.addAttribute("mango",mangoVO);
 		//해당페이지에 맞는 리뷰 가져오기
 		List<ReviewDTO> dto = test.currentReview(placename);
-		for(ReviewDTO tmpDto : dto){
-			Base64.getEncoder().encode(tmpDto.getImg());
-		}
 		model.addAttribute("dto", dto);
 		return"detailPage";
 	}

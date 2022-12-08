@@ -123,15 +123,13 @@ export class detailPage{
     currentMove(){
         $('.currentMove').on("click",(e)=>{
            /* axios.post("/data/duplicate", {}).then(()=> {
-
             });*/
         })
     }
     //최근 본 페이지 초기화 처리
     modalShow(){
         $(".btn.btn-primary.reset").on('click',(e)=>{
-            axios.post("/clearpost", {}).then(()=> {
-
+            axios.post("/clearpost", {}).then(()=> {a
                 $(".current").empty();
             });
         });
