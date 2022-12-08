@@ -323,9 +323,6 @@ export class detailPage{
             ({ 'display' : '' });
             readURL(this);
         });
-
-
-
     }
 
     //작성하기 버튼 클릭시

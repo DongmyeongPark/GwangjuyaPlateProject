@@ -148,6 +148,7 @@ public class HomeDataAct {
 
 		return idCount;
 	}
+	//리뷰 저장
 	@PostMapping("/saveReview")
 	public ReviewDTO saveReview(MultipartHttpServletRequest request) throws IOException {
 		MultipartHttpServletRequest multi = request;
