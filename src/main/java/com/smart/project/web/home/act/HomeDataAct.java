@@ -83,7 +83,6 @@ public class HomeDataAct {
 	@PostMapping("/data/map")
 	public List<MangoVO>getMapData(@RequestBody Map param){
 		String name = String.valueOf(param.get("name"));
-		log.error("클릭한 맛집  : {}",name);
 		test.viewCount(name);
 		List<MangoVO> data = test.selectName(name);
 		return data;
@@ -111,13 +110,10 @@ public class HomeDataAct {
 		WishListVO vo = new WishListVO();
 		String useremail = (String)request.getSession().getAttribute("email");
 		String placename = (String)param.get("placeName");
-		log.error("가져온 이메일 => {}",useremail);
-		log.error("가져온 장소 => {}",placename);
 		vo.setUseremail(useremail);
 		vo.setPlacename(placename);
 		test.wishDelete(vo);
 		WishListVO data = vo;
-		log.error("지운 data => {}",data);
 
 		return data;
 	}
@@ -136,15 +132,12 @@ public class HomeDataAct {
 	//해당 이메일에 로그인되어있을 때 리뷰 삭제
 	@RequestMapping("data/deleteReply")
 	public void deleteReply(@ModelAttribute ReviewDTO dto) {
-
-
 		test.reviewCount(dto.getTitle(), -1);
 		test.deleteReply(dto);
 	}
 	// 해당 이메일로 로그인되었을때 리뷰 변경
 	@RequestMapping("updateReview")
 	public void updateReview(@ModelAttribute ReviewDTO reviewDTO){
-
 		test.updateReview(reviewDTO);
 	}
 
@@ -176,12 +169,10 @@ public class HomeDataAct {
 		}else{
 			reviewDTO.setImg(null);
 		}
-
 		test.reviewCount(title, 1);
 		test.saveReview(reviewDTO);
 
 		ReviewDTO data = reviewDTO;
-		log.error("추가된 리뷰는 : {}",data);
 		return data;
 	}
 
@@ -190,7 +181,6 @@ public class HomeDataAct {
 	public Map<String, Object> showReview(@ModelAttribute ReviewDTO review1,HttpServletRequest request) {
 		Map<String, Object> data = new HashMap<>();
 		String placename = review1.getTitle() ;
-
 
 		String useremail = (String)request.getSession().getAttribute("email");
 		List<ReviewDTO> review = test.currentReview(placename);

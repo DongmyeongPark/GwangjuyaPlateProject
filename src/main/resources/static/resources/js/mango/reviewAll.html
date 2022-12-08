@@ -33,7 +33,7 @@
     <button class="likeComment likebtn">like</button>
     {{if $data.data.session==$value.email }}
     <button class="deleteComment deleteReply">delete</button>
-{{/if}}
+    {{/if}}
 <li><a class="chk_area {{if $value.checked == true }}chk_active{{/if}}" data-key="{{$value.code}}">{{$value.codeName}}</a></li>
 </li>
 {{/each}}
