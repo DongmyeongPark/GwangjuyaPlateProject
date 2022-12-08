@@ -39,8 +39,6 @@ export class detailPage{
             params : { "title": title}
 
         }).then((data)=>{
-            console.log(data.title);
-
             $("#allComments").empty().append(this.reviewShowAll(data))
             this.replyDeleteEvent();
             this.replyupdatelike();
@@ -114,7 +112,6 @@ export class detailPage{
 
     modalEvent(){
         $('#modal').on('click',(e)=>{
-            console.log('위시리스트')
             $('.wish-list').empty();
             this.wishListShowEvent();
             this.modalShow();
@@ -167,10 +164,7 @@ export class detailPage{
             let src = $(".card-img-top>.wishimg").attr("src");
             let email = $('.email').text();
             if(email == null || email == ""){
-                Swal.fire({
-                    icon: 'success',
-                    title: '로그인이 필요합니다'
-                })
+                Swal.fire({icon: 'success',title: '로그인이 필요합니다'})
             }else{
                 if($('#alertStart').css("color") == 'rgb(0, 0, 0)') {
                     $('#alertStart').css("color", "yellow");
@@ -184,25 +178,19 @@ export class detailPage{
                         url: '/wishStore',
                         params: Object
                     }).then(() => {
-                        Swal.fire({
-                            icon: 'success',
-                            title: '위시리스트에 담았습니다!'
-                        })
+                        Swal.fire({icon: 'success', title: '위시리스트에 담았습니다!'})
                     })
                 }else {
                     $('#alertStart').css("color", "black");
                     let placeName = $('.name').text();
-                    console.log(placeName);
                     axios.post("data/wishDelete",{"placeName" : placeName}).then(()=>{
                         Swal.fire({
                             icon: 'success',
                             title: '위시리스트에 삭제 하였습니다!'
                         })
                     })
-
                 }
             }
-
         })
     }
     //위시리스트에 저장이 되어 있으면 찜(별)색 유지하는 이벤트
@@ -228,7 +216,6 @@ export class detailPage{
     wishListDeleteOne(){
         $('.deleteWish').on("click",(e)=>{
                 let placeName = $(e.currentTarget).parent($('.wishForm')).find($('.placename')).text()
-                console.log(placeName);
                 axios.post("data/wishDelete",{"placeName" : placeName}).then((result)=>{
                     $(e.currentTarget).parent($('.wishForm')).remove();
                    console.log(result);
@@ -243,8 +230,6 @@ export class detailPage{
             let useremail = $("#user").text();
             let title = $("#title").text();
             let review =$(e.currentTarget).parent().find(".review-content").text();
-            debugger;
-            /*let rating = $('input[name ="rating"]:checked').val();*/
             let object = {
                 "email" : useremail,
                 "title" : title,
@@ -257,7 +242,6 @@ export class detailPage{
                 url : 'data/deleteReply',
                 params : object
             }).then((email)=>{
-                console.log(email);
                 $(e.currentTarget).parent('.wrapper').remove();
             });
 
@@ -300,7 +284,6 @@ export class detailPage{
             let title = $("#title").text();
             let updateRating = $('input[name ="rating2"]:checked').val();
             let updatenum = $(e.currentTarget).parent().parent().find(".reviewNum").text()
-            debugger;
 
             const comment = { //중복
                 "title": title,
@@ -316,15 +299,12 @@ export class detailPage{
             })
 
             location.reload();
-
-
         });
     }
 
     //이미지 이벤트
     imageEvent(){
         function readURL(input) {
-            let formData = new FormData();
             if (input.files && input.files[0]) {
                 let reader = new FileReader();
 

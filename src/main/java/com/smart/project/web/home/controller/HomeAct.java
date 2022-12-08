@@ -8,10 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpServletRequest;
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 import javax.servlet.http.HttpSession;
@@ -27,7 +25,7 @@ public class HomeAct {
 	@RequestMapping("/")
 	public String home(Model model, Criteria cri, HttpServletRequest request, HttpSession session) {
 
-		return "mango";
+		return "gwangjuya";
 	}
 
 
@@ -36,12 +34,7 @@ public class HomeAct {
 		list.clear();
 		session.removeAttribute("list");
 
-		return "mango";
-	}
-
-	@RequestMapping("/admin")
-	public String admin(){
-		return "admin/admin";
+		return "gwangjuya";
 	}
 
 	@RequestMapping("/login")
@@ -57,16 +50,17 @@ public class HomeAct {
 		list.add(mangoVO1);
 		HashSet<String> duplicateData = new HashSet<>(list);
 		session.setAttribute("list",duplicateData);
-		log.error("중복방지처리 =>{}", duplicateData);
-
 		test.reviewAvg(placename);
 		test.rvShow(placename);
-
 		MangoVO mangoVO = test.getMangoVO(placename);
 		model.addAttribute("mango",mangoVO);
-
+		//해당페이지에 맞는 리뷰 가져오기
+		List<ReviewDTO> dto = test.currentReview(placename);
+		for(ReviewDTO tmpDto : dto){
+			Base64.getEncoder().encode(tmpDto.getImg());
+		}
+		model.addAttribute("dto", dto);
 		return"detailPage";
-
 	}
 
 	@RequestMapping("/join")

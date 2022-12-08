@@ -2,7 +2,6 @@
 $(()=>{
     new Login();
 })
-
 export class Login{
 
     constructor() {
@@ -12,7 +11,6 @@ export class Login{
         this.email="" ;
         this.nickname="";
     }
-
     event(){
         $('#modal').addClass('hidden');
         Kakao.init('1c7dbcce4a9a8dcce06171f411ab8aaf');
